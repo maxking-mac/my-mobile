@@ -1,0 +1,100 @@
+/* 未收录页 */
+.page {
+  background: #f0f7f0;
+  min-height: 100vh;
+  padding: 40rpx 32rpx;
+}
+
+.header {
+  text-align: center;
+  padding: 40rpx 0 48rpx;
+}
+.header-icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+.header-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+.header-barcode {
+  font-size: 24rpx;
+  color: #888;
+  background: #f5f5f5;
+  display: inline-block;
+  padding: 6rpx 20rpx;
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+}
+.header-sub {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 选项卡片 */
+.option-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 32rpx 28rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.07);
+}
+.option-card:active {
+  background: #fafafa;
+}
+.option-icon {
+  font-size: 60rpx;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+.option-info {
+  flex: 1;
+}
+.option-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8rpx;
+}
+.option-desc {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+.option-tag {
+  display: inline-block;
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 16rpx;
+}
+.tag-green { background: #E8F5E9; color: #2E7D32; }
+.tag-blue  { background: #E3F2FD; color: #1565C0; }
+.option-arrow {
+  font-size: 44rpx;
+  color: #ccc;
+  margin-left: 16rpx;
+}
+
+/* 提示卡 */
+.info-card {
+  background: #FFF8E1;
+  border: 1rpx solid #FFE082;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-top: 16rpx;
+}
+.info-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #E65100;
+  margin-bottom: 12rpx;
+}
+.info-text {
+  font-size: 26rpx;
+  color: #795548;
+  line-height: 1.7;
+}

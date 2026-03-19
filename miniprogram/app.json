@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/result/result",
+    "pages/not-found/not-found",
+    "pages/photo-scan/photo-scan",
+    "pages/manual-input/manual-input",
+    "pages/profile/profile",
+    "pages/history/history"
+  ],
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4CAF50",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab_home.png",
+        "selectedIconPath": "images/tab_home_active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "人群",
+        "iconPath": "images/tab_profile.png",
+        "selectedIconPath": "images/tab_profile_active.png"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "记录",
+        "iconPath": "images/tab_history.png",
+        "selectedIconPath": "images/tab_history_active.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4CAF50",
+    "navigationBarTitleText": "配料读懂",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "networkTimeout": {
+    "request": 10000
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

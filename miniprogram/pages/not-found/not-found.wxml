@@ -1,0 +1,40 @@
+<!-- 未收录页 -->
+<view class="page">
+  <view class="header">
+    <view class="header-icon">🔍</view>
+    <view class="header-title">未找到该产品</view>
+    <view class="header-barcode">条形码：{{barcode}}</view>
+    <view class="header-sub">该产品暂未收录，请选择以下方式获取配料信息</view>
+  </view>
+
+  <!-- 方式1：拍照识别 -->
+  <view class="option-card" bindtap="goPhotoScan">
+    <view class="option-icon">📷</view>
+    <view class="option-info">
+      <view class="option-title">拍照识别配料表</view>
+      <view class="option-desc">拍摄配料表图片，AI自动识别提取</view>
+      <view class="option-tag tag-green">推荐 · 智谱GLM-4V-Flash</view>
+    </view>
+    <view class="option-arrow">›</view>
+  </view>
+
+  <!-- 方式2：手动输入 -->
+  <view class="option-card" bindtap="goManualInput">
+    <view class="option-icon">✏️</view>
+    <view class="option-info">
+      <view class="option-title">手动输入配料</view>
+      <view class="option-desc">对照产品标签手动输入配料表</view>
+      <view class="option-tag tag-blue">100%可用 · 无需网络</view>
+    </view>
+    <view class="option-arrow">›</view>
+  </view>
+
+  <!-- 说明 -->
+  <view class="info-card">
+    <view class="info-title">💡 小提示</view>
+    <view class="info-text">
+      无论哪种方式，分析完成后都可以选择「保存到社区」，
+      下次扫同一条码时即可秒出结果，帮助更多人！
+    </view>
+  </view>
+</view>

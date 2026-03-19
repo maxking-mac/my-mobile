@@ -1,0 +1,78 @@
+<!-- 首页 -->
+<view class="page">
+  <!-- 顶部 Banner -->
+  <view class="hero">
+    <view class="hero-icon">🔍</view>
+    <view class="hero-title">配料读懂</view>
+    <view class="hero-subtitle">扫条码 · 看配料 · 懂成分</view>
+  </view>
+
+  <!-- 扫码主按钮 -->
+  <view class="scan-section">
+    <view class="scan-btn" bindtap="onScan">
+      <view class="scan-btn-icon">📷</view>
+      <view class="scan-btn-text">扫描条形码</view>
+      <view class="scan-btn-sub">支持商品条码、二维码</view>
+    </view>
+  </view>
+
+  <!-- 手动输入条码 -->
+  <view class="manual-section card">
+    <view class="section-title">手动输入条码</view>
+    <view class="input-row">
+      <input
+        class="barcode-input"
+        placeholder="输入商品条形码数字"
+        type="number"
+        value="{{barcodeInput}}"
+        bindinput="onBarcodeInput"
+        confirm-type="search"
+        bindconfirm="onBarcodeSearch"
+      />
+      <button class="search-btn" bindtap="onBarcodeSearch">查询</button>
+    </view>
+
+    <!-- 演示产品快捷按钮 -->
+    <view class="demo-label">体验演示产品：</view>
+    <view class="demo-list">
+      <view
+        class="demo-item"
+        wx:for="{{demoProducts}}"
+        wx:key="barcode"
+        bindtap="onDemoTap"
+        data-barcode="{{item.barcode}}"
+        data-name="{{item.name}}"
+      >{{item.name}}</view>
+    </view>
+  </view>
+
+  <!-- 功能说明 -->
+  <view class="features card">
+    <view class="feature-item">
+      <view class="feature-icon">⚡</view>
+      <view class="feature-info">
+        <view class="feature-name">秒出结果</view>
+        <view class="feature-desc">本地数据库毫秒响应</view>
+      </view>
+    </view>
+    <view class="feature-item">
+      <view class="feature-icon">🔬</view>
+      <view class="feature-info">
+        <view class="feature-name">147种添加剂</view>
+        <view class="feature-desc">基于GB 2760权威数据</view>
+      </view>
+    </view>
+    <view class="feature-item">
+      <view class="feature-icon">🤖</view>
+      <view class="feature-info">
+        <view class="feature-name">AI智能识别</view>
+        <view class="feature-desc">拍照自动提取配料表</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 免责声明 -->
+  <view class="disclaimer">
+    本工具仅供参考，不构成医疗或消费建议。配料信息以产品实际标签为准。
+  </view>
+</view>

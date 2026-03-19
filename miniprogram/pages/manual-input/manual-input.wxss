@@ -1,0 +1,134 @@
+/* 手动输入页 */
+.page {
+  background: #f0f7f0;
+  min-height: 100vh;
+  padding: 32rpx 32rpx 60rpx;
+}
+
+/* 头部 */
+.header-card {
+  text-align: center;
+  padding: 40rpx 0 32rpx;
+}
+.header-icon {
+  font-size: 70rpx;
+  margin-bottom: 16rpx;
+}
+.header-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8rpx;
+}
+.header-desc {
+  font-size: 26rpx;
+  color: #888;
+}
+
+/* 表单卡片 */
+.form-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+}
+.form-label {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+.form-label-hint {
+  font-size: 22rpx;
+  color: #999;
+  font-weight: 400;
+}
+.form-input {
+  background: #f7f7f7;
+  border-radius: 10rpx;
+  padding: 18rpx 20rpx;
+  font-size: 28rpx;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+}
+.ingredients-textarea {
+  background: #f7f7f7;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #333;
+  width: 100%;
+  min-height: 200rpx;
+  line-height: 1.8;
+  box-sizing: border-box;
+}
+.char-count {
+  text-align: right;
+  font-size: 22rpx;
+  color: #bbb;
+  margin-top: 8rpx;
+}
+
+/* 示例 */
+.example-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+}
+.example-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+.example-item {
+  border-bottom: 1rpx solid #f5f5f5;
+  padding: 16rpx 0;
+}
+.example-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.example-item:active {
+  opacity: 0.6;
+}
+.example-name {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #2E7D32;
+  margin-bottom: 4rpx;
+}
+.example-preview {
+  font-size: 22rpx;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 分析按钮 */
+.btn-wrap {
+  margin-bottom: 20rpx;
+}
+.btn-analyze {
+  width: 100%;
+  background: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 16rpx;
+  padding: 36rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+.btn-analyze.active {
+  background: #4CAF50;
+}
+
+/* 提示 */
+.hint {
+  text-align: center;
+  font-size: 24rpx;
+  color: #aaa;
+}

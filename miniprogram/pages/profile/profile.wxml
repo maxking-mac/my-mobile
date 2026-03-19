@@ -1,0 +1,52 @@
+<!-- 人群设置页 -->
+<view class="page">
+
+  <view class="page-header">
+    <view class="page-header-icon">👨‍👩‍👧‍👦</view>
+    <view class="page-header-title">家庭人群设置</view>
+    <view class="page-header-desc">设置后，查看配料时将优先显示该人群需要关注的成分提示</view>
+  </view>
+
+  <view class="group-list">
+    <view
+      class="group-item {{selectedGroups.indexOf(item.id)>-1?'selected':''}}"
+      wx:for="{{groups}}"
+      wx:key="id"
+      bindtap="toggleGroup"
+      data-id="{{item.id}}"
+    >
+      <view class="group-icon">{{item.icon}}</view>
+      <view class="group-info">
+        <view class="group-name">{{item.name}}</view>
+        <view class="group-desc">{{item.desc}}</view>
+      </view>
+      <view class="group-check {{selectedGroups.indexOf(item.id)>-1?'checked':''}}">
+        {{selectedGroups.indexOf(item.id)>-1?'✓':''}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 选中提示 -->
+  <view class="selected-hint" wx:if="{{selectedGroups.length>0}}">
+    <view class="hint-icon">✅</view>
+    <view class="hint-text">已设置 {{selectedGroups.length}} 个关注人群</view>
+    <view class="hint-sub">查看配料时将自动高亮相关成分</view>
+  </view>
+  <view class="empty-hint" wx:else>
+    <view class="hint-text-gray">未选择任何人群，将显示通用配料信息</view>
+  </view>
+
+  <!-- 清除按钮 -->
+  <view class="btn-wrap" wx:if="{{selectedGroups.length>0}}">
+    <button class="btn-clear" bindtap="clearAll">清除所有设置</button>
+  </view>
+
+  <!-- 说明 -->
+  <view class="notice-card">
+    <view class="notice-title">📌 关于人群提醒</view>
+    <view class="notice-text">
+      人群提醒基于公开科学文献和国标建议，仅供参考，不构成医疗建议。
+      特殊健康状况请咨询专业医生或营养师。
+    </view>
+  </view>
+</view>

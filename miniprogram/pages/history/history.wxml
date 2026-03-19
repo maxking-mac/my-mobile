@@ -1,0 +1,51 @@
+<!-- 历史记录页 -->
+<view class="page">
+
+  <!-- 头部 -->
+  <view class="page-header">
+    <view class="page-title">扫描记录</view>
+    <view class="clear-btn" wx:if="{{history.length>0}}" bindtap="onClear">清空</view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{history.length===0}}">
+    <view class="empty-icon">📋</view>
+    <view class="empty-text">暂无扫描记录</view>
+    <view class="empty-sub">扫描商品条码或输入配料后，记录将显示在这里</view>
+    <view class="go-scan" bindtap="goScan">去扫描 →</view>
+  </view>
+
+  <!-- 记录列表 -->
+  <view class="history-list" wx:else>
+    <view
+      class="history-item"
+      wx:for="{{history}}"
+      wx:key="id"
+      bindtap="viewDetail"
+      data-index="{{index}}"
+    >
+      <!-- 评分圆点 -->
+      <view
+        class="score-dot"
+        style="background:{{item.scoreLabel.color}};"
+      >
+        <view class="score-dot-num">{{item.score}}</view>
+      </view>
+
+      <!-- 产品信息 -->
+      <view class="item-info">
+        <view class="item-name">{{item.name}}</view>
+        <view class="item-meta">
+          <view class="item-label" style="background:{{item.scoreLabel.bgColor}};color:{{item.scoreLabel.color}};">
+            {{item.scoreLabel.label}}
+          </view>
+          <view class="item-source">{{item.source}}</view>
+        </view>
+      </view>
+
+      <!-- 时间 -->
+      <view class="item-time">{{item.timeStr}}</view>
+    </view>
+  </view>
+
+</view>

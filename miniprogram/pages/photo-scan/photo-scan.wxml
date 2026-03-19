@@ -1,0 +1,99 @@
+<!-- 拍照识别配料页 -->
+<view class="page">
+
+  <!-- 未选图状态 -->
+  <view wx:if="{{!imagePath && !loading && !result}}">
+    <view class="guide-card">
+      <view class="guide-icon">📸</view>
+      <view class="guide-title">拍摄配料表</view>
+      <view class="guide-desc">对准产品背面的「配料表」区域拍摄，AI将自动识别所有配料</view>
+      <view class="guide-tips">
+        <view class="tip-item">✅ 对准配料表文字区域</view>
+        <view class="tip-item">✅ 保持画面清晰不模糊</view>
+        <view class="tip-item">✅ 光线充足效果更好</view>
+      </view>
+    </view>
+
+    <view class="btn-group">
+      <button class="btn-camera" bindtap="takePhoto">
+        <text>📷 拍摄照片</text>
+      </button>
+      <button class="btn-album" bindtap="chooseFromAlbum">
+        <text>🖼️ 从相册选择</text>
+      </button>
+    </view>
+
+    <!-- 手动输入兜底 -->
+    <view class="fallback-hint" bindtap="goManual">
+      无法拍照？点击手动输入配料 →
+    </view>
+  </view>
+
+  <!-- 图片预览状态 -->
+  <view wx:if="{{imagePath && !loading && !recognizedText}}">
+    <view class="preview-wrap">
+      <image src="{{imagePath}}" mode="widthFix" class="preview-image" />
+    </view>
+    <view class="btn-group">
+      <button class="btn-primary" bindtap="startRecognize">
+        🤖 开始AI识别
+      </button>
+      <button class="btn-secondary" bindtap="resetImage">
+        重新拍摄
+      </button>
+    </view>
+  </view>
+
+  <!-- 识别中 -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-icon">🤖</view>
+    <view class="loading-text">AI识别中...</view>
+    <view class="loading-sub">智谱GLM-4V-Flash 分析中，请稍候</view>
+  </view>
+
+  <!-- 识别结果确认 -->
+  <view wx:if="{{recognizedText && !loading}}">
+    <view class="result-card">
+      <view class="result-title">✅ 识别结果</view>
+      <view class="result-desc">请确认以下配料是否正确，可修改后再分析</view>
+      <textarea
+        class="result-textarea"
+        value="{{recognizedText}}"
+        bindinput="onTextEdit"
+        placeholder="识别的配料文字..."
+        auto-height
+      />
+    </view>
+
+    <view class="product-name-row">
+      <view class="name-label">产品名称（可选）：</view>
+      <input
+        class="name-input"
+        placeholder="如：旺旺雪饼"
+        value="{{productName}}"
+        bindinput="onNameInput"
+      />
+    </view>
+
+    <view class="btn-group">
+      <button class="btn-primary" bindtap="goAnalyze">
+        🔬 分析配料
+      </button>
+      <button class="btn-secondary" bindtap="resetAll">
+        重新识别
+      </button>
+    </view>
+  </view>
+
+  <!-- 识别失败 -->
+  <view wx:if="{{recognizeFailed}}" class="failed-state">
+    <view class="failed-icon">❌</view>
+    <view class="failed-text">识别失败</view>
+    <view class="failed-desc">{{failedReason}}</view>
+    <view class="btn-group">
+      <button class="btn-primary" bindtap="goManual">手动输入配料</button>
+      <button class="btn-secondary" bindtap="resetAll">重新拍摄</button>
+    </view>
+  </view>
+
+</view>

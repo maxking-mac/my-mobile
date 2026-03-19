@@ -1,0 +1,191 @@
+<!-- 结果页 -->
+<view class="page">
+
+  <!-- 评分卡片 -->
+  <view class="score-card">
+    <!-- 圆环评分 -->
+    <view class="score-ring-wrap">
+      <canvas
+        canvas-id="scoreRing"
+        class="score-canvas"
+        style="width:200rpx;height:200rpx;"
+      />
+      <view class="score-center">
+        <view class="score-num">{{result.score}}</view>
+        <view class="score-unit">分</view>
+      </view>
+    </view>
+
+    <!-- 评分标签 -->
+    <view class="score-label-wrap">
+      <view
+        class="score-label"
+        style="background:{{result.scoreLabel.bgColor}};color:{{result.scoreLabel.color}};"
+      >{{result.scoreLabel.label}}</view>
+    </view>
+
+    <!-- 产品信息 -->
+    <view class="product-info">
+      <view class="product-name">{{product.name}}</view>
+      <view class="product-brand" wx:if="{{product.brand}}">{{product.brand}}</view>
+    </view>
+
+    <!-- 统计数据 -->
+    <view class="stats-row">
+      <view class="stat-item">
+        <view class="stat-num">{{result.stats.total}}</view>
+        <view class="stat-label">配料总数</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="stat-num" style="color:#4CAF50;">{{result.stats.natural}}</view>
+        <view class="stat-label">天然原料</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="stat-num" style="color:#FF9800;">{{result.stats.processed}}</view>
+        <view class="stat-label">加工成分</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="stat-num" style="color:{{result.stats.highConcern>0?'#F44336':'#9E9E9E'}};">
+          {{result.stats.highConcern}}
+        </view>
+        <view class="stat-label">高关注</view>
+      </view>
+    </view>
+
+    <!-- 数据来源 -->
+    <view class="source-tag-row">
+      <view class="source-tag">来源：{{sourceLabel}}</view>
+    </view>
+  </view>
+
+  <!-- 人群提醒（如有） -->
+  <view class="group-alert card" wx:if="{{groupAlerts.length > 0}}">
+    <view class="group-alert-title">⚠️ 人群特别关注</view>
+    <view
+      class="group-alert-item"
+      wx:for="{{groupAlerts}}"
+      wx:key="name"
+    >
+      <text class="alert-name">{{item.name}}</text>
+      <text class="alert-groups">{{item.groups.join('/')}}</text>
+      <text class="alert-desc">{{item.desc}}</text>
+    </view>
+  </view>
+
+  <!-- Tab 切换 -->
+  <view class="tab-bar">
+    <view
+      class="tab-item {{activeTab===0?'active':''}}"
+      bindtap="switchTab"
+      data-tab="0"
+    >配料解读</view>
+    <view
+      class="tab-item {{activeTab===1?'active':''}}"
+      bindtap="switchTab"
+      data-tab="1"
+    >重点关注 {{result.stats.highConcern>0?'('+result.stats.highConcern+')':''}}</view>
+  </view>
+
+  <!-- Tab 内容：配料解读 -->
+  <view class="tab-content" wx:if="{{activeTab===0}}">
+    <view
+      class="ingredient-card"
+      wx:for="{{result.ingredients}}"
+      wx:key="name"
+      bindtap="toggleCard"
+      data-index="{{index}}"
+    >
+      <view class="ingredient-main">
+        <view class="category-bar" style="background:{{item.categoryColor}};"></view>
+        <view class="ingredient-body">
+          <view class="ingredient-name-row">
+            <text class="ingredient-name">{{item.name}}</text>
+            <view class="category-tag" style="background:{{item.categoryColor}}20;color:{{item.categoryColor}};">
+              {{item.categoryName}}
+            </view>
+          </view>
+          <!-- 关注等级条 -->
+          <view class="level-bar-wrap">
+            <view class="level-bar-track">
+              <view
+                class="level-bar-fill"
+                style="width:{{(item.level/4)*100}}%;background:{{item.levelColor}};"
+              ></view>
+            </view>
+            <view class="level-label" style="color:{{item.levelColor}};">{{item.levelLabel}}</view>
+          </view>
+          <!-- 人群警告 -->
+          <view class="active-groups" wx:if="{{item.activeGroupWarnings && item.activeGroupWarnings.length>0}}">
+            <text class="group-warn">⚠️ 您关注的{{item.activeGroupWarnings.join('/')}}需特别注意</text>
+          </view>
+        </view>
+        <view class="expand-arrow">{{expandedCards[index]?'▲':'▼'}}</view>
+      </view>
+
+      <!-- 展开详情 -->
+      <view class="ingredient-detail" wx:if="{{expandedCards[index]}}">
+        <view class="detail-divider"></view>
+        <view class="detail-desc">{{item.desc}}</view>
+        <view class="detail-source">数据来源：{{item.source}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Tab 内容：重点关注 -->
+  <view class="tab-content" wx:if="{{activeTab===1}}">
+    <!-- 无高关注成分 -->
+    <view class="no-highlight" wx:if="{{result.highlights.length===0}}">
+      <view class="ok-icon">✅</view>
+      <view class="ok-text">未检测到高关注度成分</view>
+      <view class="ok-sub">所有配料关注等级均较低</view>
+    </view>
+
+    <!-- 高关注配料列表 -->
+    <view
+      class="highlight-card"
+      wx:for="{{result.highlights}}"
+      wx:key="name"
+    >
+      <view class="highlight-header">
+        <view class="highlight-level-dot" style="background:{{item.levelColor}};"></view>
+        <view class="highlight-name">{{item.name}}</view>
+        <view class="highlight-level" style="color:{{item.levelColor}};">{{item.levelLabel}}</view>
+      </view>
+      <view class="highlight-category">
+        <view class="category-tag" style="background:{{item.categoryColor}}20;color:{{item.categoryColor}};">
+          {{item.categoryName}}
+        </view>
+      </view>
+      <view class="highlight-desc">{{item.desc}}</view>
+      <view class="highlight-source">来源：{{item.source}}</view>
+      <view class="highlight-groups" wx:if="{{item.groupWarnings.length>0}}">
+        <text class="group-label">特别关注人群：</text>
+        <text
+          wx:for="{{item.groupWarnings}}"
+          wx:for-item="g"
+          wx:key="*this"
+          class="group-badge"
+        >{{g}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 社区保存提示 -->
+  <view class="save-community card" wx:if="{{showSaveCommunity}}">
+    <view class="save-icon">💾</view>
+    <view class="save-info">
+      <view class="save-title">保存到社区数据库</view>
+      <view class="save-desc">帮助其他用户秒出结果</view>
+    </view>
+    <button class="save-btn" bindtap="onSaveCommunity" wx:if="{{!savedToCommunity}}">保存</button>
+    <view class="saved-badge" wx:else>已保存 ✓</view>
+  </view>
+
+  <!-- 底部免责 -->
+  <view class="disclaimer">
+    本分析仅供参考，不构成任何医疗建议。数据基于公开文献，请以产品标签为准。
+  </view>
+</view>
